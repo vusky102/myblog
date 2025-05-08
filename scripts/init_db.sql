@@ -1,0 +1,2 @@
+INSERT INTO users (username, password_hash, first_login, is_admin) VALUES ('admin', '$2b$10$YAdO7b3bl5pi91ZhlSMBIuKOKmnkfbrKHWImKnLWRRXXtHZuy7p1q', TRUE, TRUE) ON CONFLICT (username) DO UPDATE SET password_hash = EXCLUDED.password_hash, first_login = EXCLUDED.first_login, is_admin = EXCLUDED.is_admin;
+INSERT INTO posts (title, content, user_id) VALUES ('Welcome to My Blog', 'This is the default post that appears when no other posts exist. Feel free to create your own posts!', (SELECT id FROM users WHERE username = 'admin'));

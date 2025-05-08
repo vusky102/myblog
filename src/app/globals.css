@@ -19,6 +19,16 @@
   }
 }
 
+.avatar {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 100px;
+  height: 100px;
+  background-image: url('/public/static/avatar.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
