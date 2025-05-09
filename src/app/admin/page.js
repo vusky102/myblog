@@ -13,7 +13,7 @@ const AdminPage = () => {
       client.release();
     }
 
-    redirect('/admin');
+    redirect('/');
   };
 
   return (

@@ -1,9 +1,14 @@
 import pool from '@/lib/db';
+import { cookies } from 'next/headers';
+import AdminPostControlsWrapper from '@/components/AdminPostControlsWrapper';
+import { verifyToken } from '@/lib/auth';
 
 const PostPage = async ({ params }) => {
-  const { id } = params;
+  const { id } = await params;
   const client = await pool.connect();
   let post;
+  let user = null;
+  let decoded = null;
 
   try {
     const result = await client.query('SELECT * FROM posts WHERE id = $1', [id]);
@@ -12,13 +17,25 @@ const PostPage = async ({ params }) => {
     if (!post) {
       throw new Error('Post not found');
     }
+    // Check for user session cookie
+    const cookieStore = await cookies();
+    const token = cookieStore.get('token')?.value;
+    decoded = token ? verifyToken(token) : null;
+    if (decoded?.id) {
+      const userResult = await client.query('SELECT * FROM users WHERE id = $1', [decoded.id]);
+      user = userResult.rows[0] || null;
+    }
   } finally {
     client.release();
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12">
-      <article className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden p-8">
+      <article className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden p-8 relative">
+        {/* Admin controls: only show if user exists and is admin */}
+        {user?.is_admin && decoded?.isAdmin === true && (
+          <AdminPostControlsWrapper postId={post.id} />
+        )}
         <h1 className="text-4xl font-bold text-gray-900 mb-4">{post.title}</h1>
         <div className="text-gray-500 text-sm mb-8 flex items-center">
           <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
