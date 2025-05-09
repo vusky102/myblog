@@ -13,19 +13,6 @@ const HomePage = async () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
-      <nav className="bg-white shadow-lg sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <Link href="/" className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 hover:opacity-90 transition-opacity">
-            Tech Blog
-          </Link>
-          <div className="flex items-center space-x-4">
-            <img src="/static/avatar.jpg" alt="User Avatar" className="w-10 h-10 rounded-full object-cover ring-2 ring-gray-200" />
-            <Link href="/login" className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-2 px-6 rounded-full hover:opacity-90 transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-              Login
-            </Link>
-          </div>
-        </div>
-      </nav>
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-5xl mx-auto">
           <h1 className="text-4xl font-extrabold text-gray-900 mb-2 text-center">Welcome to Tech Blog</h1>
