@@ -27,7 +27,12 @@ const HomePage = async () => {
               // remove any inline markdown data-image links
               .replace(/!\[.*?\]\(data:image\/[^)]+\)/g, '')
               // remove any empty <div><br></div> placeholders
-              .replace(/<div><br><\/div>/g, '');
+              .replace(/<div><br><\/div>/g, '')
+              // convert " :<br>&nbsp; " into "<div>&nbsp;</div>"
+              .replace(/:\s*<br\s*\/?>\s*&nbsp;/g, '<div>&nbsp;</div>')
+              .replace(/<br\s*\/?>\s*&nbsp;/g, '<div>&nbsp;</div>');
+
+            
               const excerpt = clean;
               return (
                 <article key={post.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
