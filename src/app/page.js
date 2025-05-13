@@ -1,5 +1,5 @@
 export const dynamic = 'force-dynamic';
-
+import he from 'he';
 import Link from 'next/link';
 import pool from '@/lib/db';
 
@@ -21,19 +21,22 @@ const HomePage = async () => {
           <p className="text-xl text-gray-600 mb-12 text-center">Explore the latest in technology and development</p>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
             {posts.map((post) => {
-              const clean = post.content
-              // remove any <img> tags
-              .replace(/<img[^>]*>/g, '')
-              // remove any inline markdown data-image links
-              .replace(/!\[.*?\]\(data:image\/[^)]+\)/g, '')
-              // remove any empty <div><br></div> placeholders
-              .replace(/<div><br><\/div>/g, '')
-              // convert " :<br>&nbsp; " into "<div>&nbsp;</div>"
-              .replace(/:\s*<br\s*\/?>\s*&nbsp;/g, '<div>&nbsp;</div>')
-              .replace(/<br\s*\/?>\s*&nbsp;/g, '<div>&nbsp;</div>');
+              const raw = post.content
 
-            
-              const excerpt = clean;
+              // 1. Remove all `<img>` tags up front (so they don’t leave alt-text in there)
+              const withoutImages = raw.replace(/<img[^>]*>/gi, '');
+
+              // 2. Strip *all* HTML tags
+              const withoutTags = withoutImages.replace(/<[^>]+>/g, '');
+
+              // 3. Decode any HTML entities we care about (e.g. &nbsp;, &gt;, &lt;, etc.)
+              const decoded = he.decode(withoutTags);
+
+              // 4. Collapse whitespace and trim to, say, 200 chars (optional)
+              const excerpt = decoded
+                .replace(/\s+/g, ' ')
+                .trim()
+                .slice(0, 200);
               return (
                 <article key={post.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
                   <div className="p-6">
