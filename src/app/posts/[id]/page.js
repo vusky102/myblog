@@ -46,11 +46,7 @@ const PostPage = async ({ params }) => {
           </svg>
           {new Date(post.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
         </div>
-        <div className="prose max-w-none text-gray-600">
-          {post.content.split('\n').map((paragraph, index) => (
-            <p key={index} className="mb-4">{paragraph}</p>
-          ))}
-        </div>
+        <div className="prose max-w-none text-gray-600" dangerouslySetInnerHTML={{ __html: post.content }} />
       </article>
     </div>
   );
