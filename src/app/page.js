@@ -1,3 +1,4 @@
+export const revalidate = 2;
 import Link from 'next/link';
 import pool from '@/lib/db';
 

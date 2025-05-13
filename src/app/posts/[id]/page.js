@@ -1,5 +1,5 @@
 // Re-generate this page
-export const revalidate = 0;
+export const revalidate = 2;
 
 import pool from '@/lib/db';
 import { cookies } from 'next/headers';
