@@ -1,4 +1,4 @@
-import { generateToken } from '../../lib/auth';
+import { generateToken } from '@/lib/auth';
 import { setCookie } from 'js-cookie';
 
 const loginHandler = async (req, res) => {
