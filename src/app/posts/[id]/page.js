@@ -1,5 +1,5 @@
-// Re-generate this page at most once every hour
-export const revalidate = 5;
+export const dynamic = 'force-static'
+export const revalidate = 5
 
 import pool from '@/lib/db';
 import { cookies } from 'next/headers';
