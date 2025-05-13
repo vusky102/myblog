@@ -1,5 +1,5 @@
-export const dynamic = 'force-static'
-export const revalidate = 5
+// Re-generate this page
+export const revalidate = 0;
 
 import pool from '@/lib/db';
 import { cookies } from 'next/headers';
