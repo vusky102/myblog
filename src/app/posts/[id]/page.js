@@ -18,7 +18,16 @@ const PostPage = async ({ params }) => {
     post = result.rows[0];
 
     if (!post) {
-      throw new Error('Post not found');
+      // Render a user-friendly message if the post is not found
+      return (
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-gray-100">
+          <div className="bg-white p-8 rounded-xl shadow-lg text-center">
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">Post Not Found</h1>
+            <p className="text-gray-600 mb-6">This post may have been deleted or does not exist.</p>
+            <a href="/" className="text-blue-600 hover:underline">Go back to homepage</a>
+          </div>
+        </div>
+      );
     }
     // Check for user session cookie
     const cookieStore = await cookies();
