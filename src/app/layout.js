@@ -16,7 +16,13 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Lucas's Blog",
   description: "Welcome to Lucas blog",
+  icons: {
+    icon: "/static/logo.jpg",
+    shortcut: "/static/logo.jpg",
+    apple: "/static/logo.jpg",
+  },
 };
+
 
 export default function RootLayout({ children }) {
   return (
