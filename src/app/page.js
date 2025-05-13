@@ -24,18 +24,21 @@ const HomePage = async () => {
           alt="Lucas’s Blog Logo"
           className="mx-auto w-30 h-30 mb-5 shadow-lg"
         />
-        <h1 className="text-5xl font-extrabold text-gray-900 mb-2">
+        <h1 className="text-5xl font-extrabold text-gray-900 mb-8">
           Lucas Tech Blog
         </h1>
+        <p className="text-xl text-gray-600 mb-2">
+          Endless quest through the ever-evolving world of
+        </p>
         <p className="text-xl text-gray-600 mb-12">
-          Endless quest through the ever-evolving world of technology and development
+          technology and development
         </p>
         {/* subtle watermark behind text */}
         <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
           <img
             src="/static/logo.jpg"
             alt=""
-            className="w-90 h-90"
+            className="w-120 h-90"
           />
         </div>
       </header>
